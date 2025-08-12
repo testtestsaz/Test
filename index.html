@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +34,10 @@
             color: white;
             font-weight: bold;
             font-size: 0.9em;
+            cursor: pointer;
+        }
+        nav a:hover, nav a.active {
+            background-color: #ff4f81;
         }
         section {
             padding: 20px;
@@ -41,6 +46,13 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
         }
         h1, h2 {
             color: #ff4f81;
@@ -62,6 +74,109 @@
             text-decoration: none;
             font-size: 0.95em;
         }
+        
+        /* Styles pour les feedbacks */
+        .feedback-form {
+            background-color: #fff5f8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ff4f81;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ffb6c1;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .rating {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .star {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star:hover, .star.active {
+            color: #ff8fb1;
+        }
+        .submit-btn {
+            background-color: #ff8fb1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .submit-btn:hover {
+            background-color: #ff4f81;
+        }
+        
+        .feedback-item {
+            background-color: #fff5f8;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff8fb1;
+        }
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .feedback-name {
+            font-weight: bold;
+            color: #ff4f81;
+        }
+        .feedback-rating {
+            color: #ff8fb1;
+        }
+        .feedback-message {
+            line-height: 1.5;
+        }
+        
+        /* Styles pour la carte */
+        .map-container {
+            background-color: #fff5f8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .map-info {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #ffe4ec;
+            border-radius: 5px;
+            color: #ff4f81;
+            font-weight: bold;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            border: 2px solid #ffb6c1;
+        }
+        
         footer {
             text-align: center;
             padding: 15px;
@@ -70,6 +185,7 @@
             margin-top: 20px;
             font-size: 0.85em;
         }
+        
         @media (max-width: 600px) {
             header h1 {
                 font-size: 1.5em;
@@ -85,6 +201,10 @@
                 padding: 8px 15px;
                 font-size: 0.85em;
             }
+            .feedback-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -92,30 +212,258 @@
     <header>
         <h1>La Compagnie des Petits Êtres Heureux</h1>
         <p>Pet Sitting & Babysitting avec amour ❤️</p>
-    </header><nav>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-</nav>
+    </header>
+    
+    <nav>
+        <a href="#" onclick="showPage('services')" id="nav-services">Services</a>
+        <a href="#" onclick="showPage('zone')" id="nav-zone">Zone d'intervention</a>
+        <a href="#" onclick="showPage('feedbacks')" id="nav-feedbacks">Témoignages</a>
+        <a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a>
+    </nav>
 
-<section id="services">
-    <h2>Nos Services</h2>
-    <p>Nous proposons des services chaleureux et de confiance pour vos enfants et vos animaux de compagnie. Que ce soit pour quelques heures ou plusieurs jours, nous nous occupons d'eux avec douceur et attention.</p>
-    <ul>
-        <li>Garde d'animaux à domicile</li>
-        <li>Promenades pour chiens</li>
-        <li>Babysitting ponctuel ou régulier</li>
-    </ul>
-</section>
+    <div id="services" class="page active">
+        <section>
+            <h2>Nos Services</h2>
+            <p>Nous proposons des services chaleureux et de confiance pour vos enfants et vos animaux de compagnie. Que ce soit pour quelques heures ou plusieurs jours, nous nous occupons d'eux avec douceur et attention.</p>
+            <ul>
+                <li>Garde d'animaux à domicile</li>
+                <li>Promenades pour chiens</li>
+                <li>Babysitting ponctuel ou régulier</li>
+            </ul>
+        </section>
+    </div>
 
-<section id="contact" class="contact">
-    <h2>Nous Contacter</h2>
-    <p>Vous pouvez nous joindre directement :</p>
-    <a href="https://wa.me/33668847526" target="_blank">WhatsApp</a>
-</section>
+    <div id="zone" class="page">
+        <section>
+            <h2>Zone d'Intervention</h2>
+            <div class="map-container">
+                <div class="map-info">
+                    📍 Nos services sont disponibles dans un rayon de 35 km autour d'Essertine-en-Donzy
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+    </div>
 
-<footer>
-    <p>&copy; 2025 La Compagnie des Petits Êtres Heureux - Tous droits réservés</p>
-</footer>
+    <div id="feedbacks" class="page">
+        <section>
+            <h2>Vos Témoignages</h2>
+            
+            <div class="feedback-form">
+                <h3>Laissez votre avis</h3>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Votre nom :</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Votre satisfaction (sur 5) :</label>
+                        <div class="rating" id="rating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <input type="hidden" id="ratingValue" name="rating" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message :</label>
+                        <textarea id="message" name="message" placeholder="Partagez votre expérience avec nos services..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Publier mon témoignage</button>
+                </form>
+            </div>
+            
+            <div id="feedbacksList">
+                <h3>Témoignages de nos clients</h3>
+                <!-- Les témoignages seront ajoutés ici dynamiquement -->
+            </div>
+        </section>
+    </div>
 
+    <div id="contact" class="page">
+        <section class="contact">
+            <h2>Nous Contacter</h2>
+            <p>Vous pouvez nous joindre directement :</p>
+            <a href="https://wa.me/33668847526" target="_blank">WhatsApp</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 La Compagnie des Petits Êtres Heureux - Tous droits réservés</p>
+    </footer>
+
+    <!-- Script pour la carte Leaflet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+
+    <script>
+        // Variables globales
+        let currentRating = 0;
+        let feedbacks = [
+            {
+                name: "Marie D.",
+                rating: 5,
+                message: "Service exceptionnel ! Ma chienne Luna a été parfaitement gardée pendant mes vacances. Je recommande vivement !",
+                date: "2024-12-15"
+            },
+            {
+                name: "Pierre L.",
+                rating: 4,
+                message: "Très professionnel pour le babysitting de mes jumeaux. Ils étaient ravis et moi rassuré.",
+                date: "2024-12-10"
+            }
+        ];
+
+        // Fonction pour changer de page
+        function showPage(pageId) {
+            // Cacher toutes les pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Retirer la classe active de tous les liens de navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Afficher la page sélectionnée
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active');
+            
+            // Initialiser la carte si on est sur la page zone
+            if (pageId === 'zone') {
+                setTimeout(initMap, 100);
+            }
+        }
+
+        // Initialisation de la carte
+        function initMap() {
+            if (document.getElementById('map').innerHTML !== '') return; // Éviter la réinitialisation
+            
+            // Coordonnées d'Essertine-en-Donzy
+            const essertineCoords = [45.8167, 4.0667];
+            
+            const map = L.map('map').setView(essertineCoords, 10);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            
+            // Marqueur rouge pour Essertine-en-Donzy
+            L.marker(essertineCoords, {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div style="background-color: red; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white;"></div>',
+                    iconSize: [15, 15],
+                    iconAnchor: [7, 7]
+                })
+            }).addTo(map).bindPopup('📍 Essertine-en-Donzy<br>Centre de notre zone d\'intervention');
+            
+            // Cercle de 35km de rayon
+            L.circle(essertineCoords, {
+                color: '#ff8fb1',
+                fillColor: '#ff8fb1',
+                fillOpacity: 0.1,
+                radius: 35000 // 35km en mètres
+            }).addTo(map).bindPopup('Zone de service - Rayon de 35km');
+        }
+
+        // Gestion du système d'étoiles
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            const ratingValue = document.getElementById('ratingValue');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    currentRating = parseInt(this.dataset.rating);
+                    ratingValue.value = currentRating;
+                    updateStars();
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    const hoverRating = parseInt(this.dataset.rating);
+                    highlightStars(hoverRating);
+                });
+            });
+            
+            document.getElementById('rating').addEventListener('mouseleave', function() {
+                updateStars();
+            });
+            
+            function updateStars() {
+                stars.forEach((star, index) => {
+                    star.classList.toggle('active', index < currentRating);
+                });
+            }
+            
+            function highlightStars(rating) {
+                stars.forEach((star, index) => {
+                    star.classList.toggle('active', index < rating);
+                });
+            }
+            
+            // Gestion du formulaire de feedback
+            document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const rating = document.getElementById('ratingValue').value;
+                const message = document.getElementById('message').value;
+                
+                if (rating === '0') {
+                    alert('Veuillez sélectionner une note !');
+                    return;
+                }
+                
+                // Ajouter le nouveau feedback
+                const newFeedback = {
+                    name: name,
+                    rating: parseInt(rating),
+                    message: message,
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                feedbacks.unshift(newFeedback); // Ajouter au début
+                displayFeedbacks();
+                
+                // Réinitialiser le formulaire
+                this.reset();
+                currentRating = 0;
+                document.getElementById('ratingValue').value = '0';
+                updateStars();
+                
+                alert('Merci pour votre témoignage !');
+            });
+            
+            // Afficher les feedbacks initiaux
+            displayFeedbacks();
+        });
+
+        // Fonction pour afficher les feedbacks
+        function displayFeedbacks() {
+            const feedbacksList = document.getElementById('feedbacksList');
+            const feedbacksHtml = feedbacks.map(feedback => {
+                const stars = '★'.repeat(feedback.rating) + '☆'.repeat(5 - feedback.rating);
+                return `
+                    <div class="feedback-item">
+                        <div class="feedback-header">
+                            <span class="feedback-name">${feedback.name}</span>
+                            <span class="feedback-rating">${stars}</span>
+                        </div>
+                        <div class="feedback-message">${feedback.message}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            feedbacksList.innerHTML = `<h3>Témoignages de nos clients</h3>${feedbacksHtml}`;
+        }
+
+        // Initialisation par défaut
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('nav-services').classList.add('active');
+        });
+    </script>
 </body>
-</html>
+    </html>
